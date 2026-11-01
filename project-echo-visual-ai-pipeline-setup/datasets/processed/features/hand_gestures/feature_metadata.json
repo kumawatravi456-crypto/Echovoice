@@ -1,0 +1,1735 @@
+{
+  "schema_version": "1.0",
+  "input": {
+    "root": "datasets/processed/model_ready/hand_gestures",
+    "expected_recordings": 27,
+    "classes": {
+      "YES": 7,
+      "NO": 5,
+      "HELP": 5,
+      "WATER": 5,
+      "STOP": 5
+    },
+    "sequence_shape": [
+      32,
+      2,
+      21,
+      3
+    ],
+    "participant_count": 1
+  },
+  "generalization_note": "All current recordings are from one participant; these features do not establish participant-independent generalization.",
+  "outputs": [
+    "features.csv",
+    "feature_metadata.json",
+    "feature_manifest.csv"
+  ],
+  "row_unit": "one original recording; never one row per frame",
+  "coordinate_convention": "Static geometry uses normalized_landmarks: wrist-relative and divided by the Euclidean wrist-to-middle-MCP distance. Wrist trajectory uses original_landmarks x-y image-normalized coordinates. Neither represents physical distance.",
+  "landmark_definitions": {
+    "wrist": 0,
+    "thumb": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "index": [
+      5,
+      6,
+      7,
+      8
+    ],
+    "middle": [
+      9,
+      10,
+      11,
+      12
+    ],
+    "ring": [
+      13,
+      14,
+      15,
+      16
+    ],
+    "pinky": [
+      17,
+      18,
+      19,
+      20
+    ],
+    "finger_angles": "Three internal angles per digit at successive joints; angle vertices are listed in FINGER_ANGLE_TRIPLES in the extractor."
+  },
+  "features": {
+    "overall_valid_hand_frame_ratio": {
+      "formula": "sum(hand_validity_mask) divided by all frame-slot positions across both slots in this 32-frame sequence.",
+      "units": "ratio in [0,1]",
+      "aggregation": "one value per recording"
+    },
+    "slot0_valid_frame_count": {
+      "formula": "Count of frames with hand_validity_mask true for this slot.",
+      "units": "frames",
+      "aggregation": "one value per recording"
+    },
+    "slot0_missing_frame_count": {
+      "formula": "32 minus valid_frame_count for this slot.",
+      "units": "frames",
+      "aggregation": "one value per recording"
+    },
+    "slot0_valid_frame_ratio": {
+      "formula": "valid_frame_count divided by 32 for this slot.",
+      "units": "ratio in [0,1]",
+      "aggregation": "one value per recording"
+    },
+    "slot0_handedness_consistency": {
+      "formula": "Count of the modal nonempty handedness label divided by all nonempty handedness labels among detected observations for this slot.",
+      "units": "ratio in [0,1]",
+      "aggregation": "one value per recording"
+    },
+    "slot0_handedness_mode": {
+      "formula": "Most frequent nonempty handedness label among detected observations for this slot; ties are resolved alphabetically, case-insensitively.",
+      "units": "category (Left/Right when provided)",
+      "aggregation": "one value per recording"
+    },
+    "slot0_thumb_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_thumb_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_thumb_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_thumb_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_thumb_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_thumb_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_index_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_index_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_index_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_index_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_index_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_index_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_middle_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_middle_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_middle_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_middle_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_middle_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_middle_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_ring_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_ring_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_ring_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_ring_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_ring_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_ring_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_pinky_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_pinky_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_pinky_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_pinky_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_pinky_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_pinky_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_thumb_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_thumb_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_thumb_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_thumb_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_thumb_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_thumb_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_index_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_index_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_index_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_index_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_index_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_index_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_middle_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_middle_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_middle_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_middle_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_middle_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_middle_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_ring_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_ring_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_ring_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_ring_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_ring_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_ring_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_pinky_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_pinky_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_pinky_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_pinky_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_pinky_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_pinky_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_palm_length_norm_mean": {
+      "formula": "Euclidean distance from wrist landmark 0 to middle-finger MCP landmark 9.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_palm_length_norm_std": {
+      "formula": "Euclidean distance from wrist landmark 0 to middle-finger MCP landmark 9.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_palm_span_norm_mean": {
+      "formula": "Euclidean distance between index MCP landmark 5 and pinky MCP landmark 17.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_palm_span_norm_std": {
+      "formula": "Euclidean distance between index MCP landmark 5 and pinky MCP landmark 17.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_wrist_to_palm_center_norm_mean": {
+      "formula": "Euclidean distance from wrist to the mean of wrist and MCP landmarks (0,5,9,13,17).",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_wrist_to_palm_center_norm_std": {
+      "formula": "Euclidean distance from wrist to the mean of wrist and MCP landmarks (0,5,9,13,17).",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_mcp_5_to_9_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_mcp_5_to_9_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_mcp_5_to_13_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_mcp_5_to_13_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_mcp_5_to_17_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_mcp_5_to_17_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_mcp_9_to_13_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_mcp_9_to_13_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_mcp_9_to_17_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_mcp_9_to_17_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_mcp_13_to_17_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_mcp_13_to_17_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_palm_projected_area_norm2_mean": {
+      "formula": "Absolute shoelace area of polygon (wrist, index MCP, middle MCP, ring MCP, pinky MCP) in normalized x-y coordinates.",
+      "units": "normalized-coordinate units squared",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_palm_projected_area_norm2_std": {
+      "formula": "Absolute shoelace area of polygon (wrist, index MCP, middle MCP, ring MCP, pinky MCP) in normalized x-y coordinates.",
+      "units": "normalized-coordinate units squared",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_palm_axis_orientation_sin_mean": {
+      "formula": "Sine of atan2(middle-MCP_y-wrist_y, middle-MCP_x-wrist_x).",
+      "units": "unitless",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_palm_axis_orientation_sin_std": {
+      "formula": "Sine of atan2(middle-MCP_y-wrist_y, middle-MCP_x-wrist_x).",
+      "units": "unitless",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_palm_axis_orientation_cos_mean": {
+      "formula": "Cosine of atan2(middle-MCP_y-wrist_y, middle-MCP_x-wrist_x).",
+      "units": "unitless",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot0_palm_axis_orientation_cos_std": {
+      "formula": "Cosine of atan2(middle-MCP_y-wrist_y, middle-MCP_x-wrist_x).",
+      "units": "unitless",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot0_palm_axis_circular_mean_deg": {
+      "formula": "atan2(mean(sin(theta)), mean(cos(theta))) for valid-frame image-plane wrist-to-middle-MCP angles.",
+      "units": "degrees in image x-y plane (y increases downward)",
+      "aggregation": "circular mean over valid frames"
+    },
+    "slot0_mean_landmark_displacement_norm": {
+      "formula": "Mean Euclidean displacement across all 21 landmarks and all adjacent valid frame pairs in this slot.",
+      "units": "normalized-coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_std_landmark_displacement_norm": {
+      "formula": "Population standard deviation of Euclidean displacement across all 21 landmarks and all adjacent valid frame pairs in this slot.",
+      "units": "normalized-coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_mean_motion_magnitude_norm_per_s": {
+      "formula": "Mean across adjacent valid pairs of mean 21-landmark displacement divided by elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_max_motion_magnitude_norm_per_s": {
+      "formula": "Maximum across adjacent valid pairs of mean 21-landmark displacement divided by elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_motion_variation_norm_per_interval": {
+      "formula": "Mean absolute difference between successive valid-pair mean landmark displacements; not time-normalized.",
+      "units": "normalized-coordinate units per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_valid_motion_interval_count": {
+      "formula": "Number of adjacent frame pairs for which this hand slot is valid in both frames.",
+      "units": "intervals",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_thumb_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the thumb landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_thumb_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the thumb landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_thumb_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal thumb joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_index_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the index landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_index_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the index landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_index_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal index joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_middle_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the middle landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_middle_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the middle landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_middle_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal middle joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_ring_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the ring landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_ring_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the ring landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_ring_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal ring joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_pinky_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the pinky landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_pinky_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the pinky landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_pinky_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal pinky joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_wrist_path_length_image_norm": {
+      "formula": "Sum of image-normalized x-y wrist displacements over adjacent valid frame pairs; missing pairs are not bridged.",
+      "units": "image-normalized coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_wrist_mean_step_image_norm": {
+      "formula": "Mean image-normalized x-y wrist displacement over adjacent valid frame pairs.",
+      "units": "image-normalized coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_wrist_mean_speed_image_norm_per_s": {
+      "formula": "Mean image-normalized x-y wrist displacement divided by elapsed seconds over adjacent valid pairs.",
+      "units": "image-normalized coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_wrist_max_speed_image_norm_per_s": {
+      "formula": "Maximum image-normalized x-y wrist displacement divided by elapsed seconds over adjacent valid pairs.",
+      "units": "image-normalized coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_wrist_start_to_end_displacement_image_norm": {
+      "formula": "Euclidean image-normalized x-y displacement between the first and last valid wrist observations in this slot.",
+      "units": "image-normalized coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot0_wrist_valid_position_count": {
+      "formula": "Number of valid frames with a finite x-y wrist position in this slot.",
+      "units": "frames",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_valid_frame_count": {
+      "formula": "Count of frames with hand_validity_mask true for this slot.",
+      "units": "frames",
+      "aggregation": "one value per recording"
+    },
+    "slot1_missing_frame_count": {
+      "formula": "32 minus valid_frame_count for this slot.",
+      "units": "frames",
+      "aggregation": "one value per recording"
+    },
+    "slot1_valid_frame_ratio": {
+      "formula": "valid_frame_count divided by 32 for this slot.",
+      "units": "ratio in [0,1]",
+      "aggregation": "one value per recording"
+    },
+    "slot1_handedness_consistency": {
+      "formula": "Count of the modal nonempty handedness label divided by all nonempty handedness labels among detected observations for this slot.",
+      "units": "ratio in [0,1]",
+      "aggregation": "one value per recording"
+    },
+    "slot1_handedness_mode": {
+      "formula": "Most frequent nonempty handedness label among detected observations for this slot; ties are resolved alphabetically, case-insensitively.",
+      "units": "category (Left/Right when provided)",
+      "aggregation": "one value per recording"
+    },
+    "slot1_thumb_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_thumb_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_thumb_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_thumb_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_thumb_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_thumb_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_index_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_index_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_index_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_index_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_index_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_index_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_middle_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_middle_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_middle_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_middle_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_middle_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_middle_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_ring_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_ring_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_ring_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_ring_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_ring_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_ring_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_pinky_joint1_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_pinky_joint1_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_pinky_joint2_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_pinky_joint2_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_pinky_joint3_angle_deg_mean": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_pinky_joint3_angle_deg_std": {
+      "formula": "Internal angle at the named joint, acos((a-b) dot (c-b) / (|a-b||c-b|)) using the three landmark indices for that digit and joint.",
+      "units": "degrees",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_thumb_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_thumb_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_thumb_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_thumb_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_thumb_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_thumb_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_index_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_index_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_index_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_index_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_index_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_index_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_middle_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_middle_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_middle_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_middle_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_middle_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_middle_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_ring_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_ring_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_ring_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_ring_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_ring_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_ring_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_pinky_tip_to_wrist_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_pinky_tip_to_wrist_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to wrist landmark 0 in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_pinky_tip_to_palm_center_distance_norm_mean": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_pinky_tip_to_palm_center_distance_norm_std": {
+      "formula": "Euclidean distance from the digit tip to the mean of wrist and four MCP landmarks (0,5,9,13,17) in scale-normalized coordinates.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_pinky_extension_ratio_mean": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_pinky_extension_ratio_std": {
+      "formula": "Tip-to-base chord length divided by the sum of adjacent digit-segment lengths (thumb base is CMC landmark 1; other bases are MCP landmarks); bounded to [0,1].",
+      "units": "unitless ratio",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_palm_length_norm_mean": {
+      "formula": "Euclidean distance from wrist landmark 0 to middle-finger MCP landmark 9.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_palm_length_norm_std": {
+      "formula": "Euclidean distance from wrist landmark 0 to middle-finger MCP landmark 9.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_palm_span_norm_mean": {
+      "formula": "Euclidean distance between index MCP landmark 5 and pinky MCP landmark 17.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_palm_span_norm_std": {
+      "formula": "Euclidean distance between index MCP landmark 5 and pinky MCP landmark 17.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_wrist_to_palm_center_norm_mean": {
+      "formula": "Euclidean distance from wrist to the mean of wrist and MCP landmarks (0,5,9,13,17).",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_wrist_to_palm_center_norm_std": {
+      "formula": "Euclidean distance from wrist to the mean of wrist and MCP landmarks (0,5,9,13,17).",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_mcp_5_to_9_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_mcp_5_to_9_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_mcp_5_to_13_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_mcp_5_to_13_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_mcp_5_to_17_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_mcp_5_to_17_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_mcp_9_to_13_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_mcp_9_to_13_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_mcp_9_to_17_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_mcp_9_to_17_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_mcp_13_to_17_distance_norm_mean": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_mcp_13_to_17_distance_norm_std": {
+      "formula": "Euclidean distance between the two MCP landmark indices encoded in the column name.",
+      "units": "normalized-coordinate units",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_palm_projected_area_norm2_mean": {
+      "formula": "Absolute shoelace area of polygon (wrist, index MCP, middle MCP, ring MCP, pinky MCP) in normalized x-y coordinates.",
+      "units": "normalized-coordinate units squared",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_palm_projected_area_norm2_std": {
+      "formula": "Absolute shoelace area of polygon (wrist, index MCP, middle MCP, ring MCP, pinky MCP) in normalized x-y coordinates.",
+      "units": "normalized-coordinate units squared",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_palm_axis_orientation_sin_mean": {
+      "formula": "Sine of atan2(middle-MCP_y-wrist_y, middle-MCP_x-wrist_x).",
+      "units": "unitless",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_palm_axis_orientation_sin_std": {
+      "formula": "Sine of atan2(middle-MCP_y-wrist_y, middle-MCP_x-wrist_x).",
+      "units": "unitless",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_palm_axis_orientation_cos_mean": {
+      "formula": "Cosine of atan2(middle-MCP_y-wrist_y, middle-MCP_x-wrist_x).",
+      "units": "unitless",
+      "aggregation": "arithmetic mean over valid frames"
+    },
+    "slot1_palm_axis_orientation_cos_std": {
+      "formula": "Cosine of atan2(middle-MCP_y-wrist_y, middle-MCP_x-wrist_x).",
+      "units": "unitless",
+      "aggregation": "population standard deviation (ddof=0) over valid frames"
+    },
+    "slot1_palm_axis_circular_mean_deg": {
+      "formula": "atan2(mean(sin(theta)), mean(cos(theta))) for valid-frame image-plane wrist-to-middle-MCP angles.",
+      "units": "degrees in image x-y plane (y increases downward)",
+      "aggregation": "circular mean over valid frames"
+    },
+    "slot1_mean_landmark_displacement_norm": {
+      "formula": "Mean Euclidean displacement across all 21 landmarks and all adjacent valid frame pairs in this slot.",
+      "units": "normalized-coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_std_landmark_displacement_norm": {
+      "formula": "Population standard deviation of Euclidean displacement across all 21 landmarks and all adjacent valid frame pairs in this slot.",
+      "units": "normalized-coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_mean_motion_magnitude_norm_per_s": {
+      "formula": "Mean across adjacent valid pairs of mean 21-landmark displacement divided by elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_max_motion_magnitude_norm_per_s": {
+      "formula": "Maximum across adjacent valid pairs of mean 21-landmark displacement divided by elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_motion_variation_norm_per_interval": {
+      "formula": "Mean absolute difference between successive valid-pair mean landmark displacements; not time-normalized.",
+      "units": "normalized-coordinate units per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_valid_motion_interval_count": {
+      "formula": "Number of adjacent frame pairs for which this hand slot is valid in both frames.",
+      "units": "intervals",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_thumb_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the thumb landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_thumb_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the thumb landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_thumb_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal thumb joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_index_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the index landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_index_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the index landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_index_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal index joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_middle_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the middle landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_middle_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the middle landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_middle_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal middle joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_ring_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the ring landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_ring_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the ring landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_ring_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal ring joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_pinky_mean_motion_norm_per_s": {
+      "formula": "Mean per-valid-pair average landmark speed over the pinky landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_pinky_max_motion_norm_per_s": {
+      "formula": "Maximum per-valid-pair average landmark speed over the pinky landmarks (four points), using elapsed timestamp seconds.",
+      "units": "normalized-coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_pinky_mean_abs_joint_angle_change_deg": {
+      "formula": "Mean absolute frame-to-frame change across the three internal pinky joint angles over adjacent valid frame pairs.",
+      "units": "degrees per interval",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_wrist_path_length_image_norm": {
+      "formula": "Sum of image-normalized x-y wrist displacements over adjacent valid frame pairs; missing pairs are not bridged.",
+      "units": "image-normalized coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_wrist_mean_step_image_norm": {
+      "formula": "Mean image-normalized x-y wrist displacement over adjacent valid frame pairs.",
+      "units": "image-normalized coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_wrist_mean_speed_image_norm_per_s": {
+      "formula": "Mean image-normalized x-y wrist displacement divided by elapsed seconds over adjacent valid pairs.",
+      "units": "image-normalized coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_wrist_max_speed_image_norm_per_s": {
+      "formula": "Maximum image-normalized x-y wrist displacement divided by elapsed seconds over adjacent valid pairs.",
+      "units": "image-normalized coordinate units per second",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_wrist_start_to_end_displacement_image_norm": {
+      "formula": "Euclidean image-normalized x-y displacement between the first and last valid wrist observations in this slot.",
+      "units": "image-normalized coordinate units",
+      "aggregation": "recording-level summary"
+    },
+    "slot1_wrist_valid_position_count": {
+      "formula": "Number of valid frames with a finite x-y wrist position in this slot.",
+      "units": "frames",
+      "aggregation": "recording-level summary"
+    }
+  },
+  "temporal_policy": "Frame-to-frame features use only adjacent frames where the same slot has hand_validity_mask true in both. Timestamps in milliseconds are used when finite and strictly increasing; otherwise frame-index differences/source_fps are used if available. Motion rates are normalized-coordinate units per second, never real-world speed. Wrist path uses original normalized image x-y coordinates.",
+  "missing_data_policy": "No interpolation. Geometry uses only valid hand frames. Temporal transitions require two adjacent valid observations in the same slot. Unavailable feature values are blank in CSV and have a paired *_available=0 indicator. No missing coordinates are zero-filled. Reliability counts/ratios are always available; handedness mode/consistency are unavailable if no labeled detections exist.",
+  "hand_policy": "Two slots are processed independently and retained as slot0 and slot1; no slot swapping or left/right merging. Handedness mode and consistency are provided per slot.",
+  "static_summary_policy": "For per-frame static features, store mean and population standard deviation over valid frames. Orientation has circular mean represented by sine/cosine means and a circular mean angle.",
+  "csv_columns": [
+    "recording_id",
+    "source_filename",
+    "source_relative_path",
+    "class_label",
+    "overall_valid_hand_frame_ratio",
+    "overall_valid_hand_frame_ratio_available",
+    "temporal_time_basis",
+    "slot0_valid_frame_count",
+    "slot0_valid_frame_count_available",
+    "slot0_missing_frame_count",
+    "slot0_missing_frame_count_available",
+    "slot0_valid_frame_ratio",
+    "slot0_valid_frame_ratio_available",
+    "slot0_handedness_consistency",
+    "slot0_handedness_consistency_available",
+    "slot0_handedness_mode",
+    "slot0_handedness_mode_available",
+    "slot0_thumb_joint1_angle_deg_mean",
+    "slot0_thumb_joint1_angle_deg_mean_available",
+    "slot0_thumb_joint1_angle_deg_std",
+    "slot0_thumb_joint1_angle_deg_std_available",
+    "slot0_thumb_joint2_angle_deg_mean",
+    "slot0_thumb_joint2_angle_deg_mean_available",
+    "slot0_thumb_joint2_angle_deg_std",
+    "slot0_thumb_joint2_angle_deg_std_available",
+    "slot0_thumb_joint3_angle_deg_mean",
+    "slot0_thumb_joint3_angle_deg_mean_available",
+    "slot0_thumb_joint3_angle_deg_std",
+    "slot0_thumb_joint3_angle_deg_std_available",
+    "slot0_index_joint1_angle_deg_mean",
+    "slot0_index_joint1_angle_deg_mean_available",
+    "slot0_index_joint1_angle_deg_std",
+    "slot0_index_joint1_angle_deg_std_available",
+    "slot0_index_joint2_angle_deg_mean",
+    "slot0_index_joint2_angle_deg_mean_available",
+    "slot0_index_joint2_angle_deg_std",
+    "slot0_index_joint2_angle_deg_std_available",
+    "slot0_index_joint3_angle_deg_mean",
+    "slot0_index_joint3_angle_deg_mean_available",
+    "slot0_index_joint3_angle_deg_std",
+    "slot0_index_joint3_angle_deg_std_available",
+    "slot0_middle_joint1_angle_deg_mean",
+    "slot0_middle_joint1_angle_deg_mean_available",
+    "slot0_middle_joint1_angle_deg_std",
+    "slot0_middle_joint1_angle_deg_std_available",
+    "slot0_middle_joint2_angle_deg_mean",
+    "slot0_middle_joint2_angle_deg_mean_available",
+    "slot0_middle_joint2_angle_deg_std",
+    "slot0_middle_joint2_angle_deg_std_available",
+    "slot0_middle_joint3_angle_deg_mean",
+    "slot0_middle_joint3_angle_deg_mean_available",
+    "slot0_middle_joint3_angle_deg_std",
+    "slot0_middle_joint3_angle_deg_std_available",
+    "slot0_ring_joint1_angle_deg_mean",
+    "slot0_ring_joint1_angle_deg_mean_available",
+    "slot0_ring_joint1_angle_deg_std",
+    "slot0_ring_joint1_angle_deg_std_available",
+    "slot0_ring_joint2_angle_deg_mean",
+    "slot0_ring_joint2_angle_deg_mean_available",
+    "slot0_ring_joint2_angle_deg_std",
+    "slot0_ring_joint2_angle_deg_std_available",
+    "slot0_ring_joint3_angle_deg_mean",
+    "slot0_ring_joint3_angle_deg_mean_available",
+    "slot0_ring_joint3_angle_deg_std",
+    "slot0_ring_joint3_angle_deg_std_available",
+    "slot0_pinky_joint1_angle_deg_mean",
+    "slot0_pinky_joint1_angle_deg_mean_available",
+    "slot0_pinky_joint1_angle_deg_std",
+    "slot0_pinky_joint1_angle_deg_std_available",
+    "slot0_pinky_joint2_angle_deg_mean",
+    "slot0_pinky_joint2_angle_deg_mean_available",
+    "slot0_pinky_joint2_angle_deg_std",
+    "slot0_pinky_joint2_angle_deg_std_available",
+    "slot0_pinky_joint3_angle_deg_mean",
+    "slot0_pinky_joint3_angle_deg_mean_available",
+    "slot0_pinky_joint3_angle_deg_std",
+    "slot0_pinky_joint3_angle_deg_std_available",
+    "slot0_thumb_tip_to_wrist_distance_norm_mean",
+    "slot0_thumb_tip_to_wrist_distance_norm_mean_available",
+    "slot0_thumb_tip_to_wrist_distance_norm_std",
+    "slot0_thumb_tip_to_wrist_distance_norm_std_available",
+    "slot0_thumb_tip_to_palm_center_distance_norm_mean",
+    "slot0_thumb_tip_to_palm_center_distance_norm_mean_available",
+    "slot0_thumb_tip_to_palm_center_distance_norm_std",
+    "slot0_thumb_tip_to_palm_center_distance_norm_std_available",
+    "slot0_thumb_extension_ratio_mean",
+    "slot0_thumb_extension_ratio_mean_available",
+    "slot0_thumb_extension_ratio_std",
+    "slot0_thumb_extension_ratio_std_available",
+    "slot0_index_tip_to_wrist_distance_norm_mean",
+    "slot0_index_tip_to_wrist_distance_norm_mean_available",
+    "slot0_index_tip_to_wrist_distance_norm_std",
+    "slot0_index_tip_to_wrist_distance_norm_std_available",
+    "slot0_index_tip_to_palm_center_distance_norm_mean",
+    "slot0_index_tip_to_palm_center_distance_norm_mean_available",
+    "slot0_index_tip_to_palm_center_distance_norm_std",
+    "slot0_index_tip_to_palm_center_distance_norm_std_available",
+    "slot0_index_extension_ratio_mean",
+    "slot0_index_extension_ratio_mean_available",
+    "slot0_index_extension_ratio_std",
+    "slot0_index_extension_ratio_std_available",
+    "slot0_middle_tip_to_wrist_distance_norm_mean",
+    "slot0_middle_tip_to_wrist_distance_norm_mean_available",
+    "slot0_middle_tip_to_wrist_distance_norm_std",
+    "slot0_middle_tip_to_wrist_distance_norm_std_available",
+    "slot0_middle_tip_to_palm_center_distance_norm_mean",
+    "slot0_middle_tip_to_palm_center_distance_norm_mean_available",
+    "slot0_middle_tip_to_palm_center_distance_norm_std",
+    "slot0_middle_tip_to_palm_center_distance_norm_std_available",
+    "slot0_middle_extension_ratio_mean",
+    "slot0_middle_extension_ratio_mean_available",
+    "slot0_middle_extension_ratio_std",
+    "slot0_middle_extension_ratio_std_available",
+    "slot0_ring_tip_to_wrist_distance_norm_mean",
+    "slot0_ring_tip_to_wrist_distance_norm_mean_available",
+    "slot0_ring_tip_to_wrist_distance_norm_std",
+    "slot0_ring_tip_to_wrist_distance_norm_std_available",
+    "slot0_ring_tip_to_palm_center_distance_norm_mean",
+    "slot0_ring_tip_to_palm_center_distance_norm_mean_available",
+    "slot0_ring_tip_to_palm_center_distance_norm_std",
+    "slot0_ring_tip_to_palm_center_distance_norm_std_available",
+    "slot0_ring_extension_ratio_mean",
+    "slot0_ring_extension_ratio_mean_available",
+    "slot0_ring_extension_ratio_std",
+    "slot0_ring_extension_ratio_std_available",
+    "slot0_pinky_tip_to_wrist_distance_norm_mean",
+    "slot0_pinky_tip_to_wrist_distance_norm_mean_available",
+    "slot0_pinky_tip_to_wrist_distance_norm_std",
+    "slot0_pinky_tip_to_wrist_distance_norm_std_available",
+    "slot0_pinky_tip_to_palm_center_distance_norm_mean",
+    "slot0_pinky_tip_to_palm_center_distance_norm_mean_available",
+    "slot0_pinky_tip_to_palm_center_distance_norm_std",
+    "slot0_pinky_tip_to_palm_center_distance_norm_std_available",
+    "slot0_pinky_extension_ratio_mean",
+    "slot0_pinky_extension_ratio_mean_available",
+    "slot0_pinky_extension_ratio_std",
+    "slot0_pinky_extension_ratio_std_available",
+    "slot0_palm_length_norm_mean",
+    "slot0_palm_length_norm_mean_available",
+    "slot0_palm_length_norm_std",
+    "slot0_palm_length_norm_std_available",
+    "slot0_palm_span_norm_mean",
+    "slot0_palm_span_norm_mean_available",
+    "slot0_palm_span_norm_std",
+    "slot0_palm_span_norm_std_available",
+    "slot0_wrist_to_palm_center_norm_mean",
+    "slot0_wrist_to_palm_center_norm_mean_available",
+    "slot0_wrist_to_palm_center_norm_std",
+    "slot0_wrist_to_palm_center_norm_std_available",
+    "slot0_mcp_5_to_9_distance_norm_mean",
+    "slot0_mcp_5_to_9_distance_norm_mean_available",
+    "slot0_mcp_5_to_9_distance_norm_std",
+    "slot0_mcp_5_to_9_distance_norm_std_available",
+    "slot0_mcp_5_to_13_distance_norm_mean",
+    "slot0_mcp_5_to_13_distance_norm_mean_available",
+    "slot0_mcp_5_to_13_distance_norm_std",
+    "slot0_mcp_5_to_13_distance_norm_std_available",
+    "slot0_mcp_5_to_17_distance_norm_mean",
+    "slot0_mcp_5_to_17_distance_norm_mean_available",
+    "slot0_mcp_5_to_17_distance_norm_std",
+    "slot0_mcp_5_to_17_distance_norm_std_available",
+    "slot0_mcp_9_to_13_distance_norm_mean",
+    "slot0_mcp_9_to_13_distance_norm_mean_available",
+    "slot0_mcp_9_to_13_distance_norm_std",
+    "slot0_mcp_9_to_13_distance_norm_std_available",
+    "slot0_mcp_9_to_17_distance_norm_mean",
+    "slot0_mcp_9_to_17_distance_norm_mean_available",
+    "slot0_mcp_9_to_17_distance_norm_std",
+    "slot0_mcp_9_to_17_distance_norm_std_available",
+    "slot0_mcp_13_to_17_distance_norm_mean",
+    "slot0_mcp_13_to_17_distance_norm_mean_available",
+    "slot0_mcp_13_to_17_distance_norm_std",
+    "slot0_mcp_13_to_17_distance_norm_std_available",
+    "slot0_palm_projected_area_norm2_mean",
+    "slot0_palm_projected_area_norm2_mean_available",
+    "slot0_palm_projected_area_norm2_std",
+    "slot0_palm_projected_area_norm2_std_available",
+    "slot0_palm_axis_orientation_sin_mean",
+    "slot0_palm_axis_orientation_sin_mean_available",
+    "slot0_palm_axis_orientation_sin_std",
+    "slot0_palm_axis_orientation_sin_std_available",
+    "slot0_palm_axis_orientation_cos_mean",
+    "slot0_palm_axis_orientation_cos_mean_available",
+    "slot0_palm_axis_orientation_cos_std",
+    "slot0_palm_axis_orientation_cos_std_available",
+    "slot0_palm_axis_circular_mean_deg",
+    "slot0_palm_axis_circular_mean_deg_available",
+    "slot0_mean_landmark_displacement_norm",
+    "slot0_mean_landmark_displacement_norm_available",
+    "slot0_std_landmark_displacement_norm",
+    "slot0_std_landmark_displacement_norm_available",
+    "slot0_mean_motion_magnitude_norm_per_s",
+    "slot0_mean_motion_magnitude_norm_per_s_available",
+    "slot0_max_motion_magnitude_norm_per_s",
+    "slot0_max_motion_magnitude_norm_per_s_available",
+    "slot0_motion_variation_norm_per_interval",
+    "slot0_motion_variation_norm_per_interval_available",
+    "slot0_valid_motion_interval_count",
+    "slot0_valid_motion_interval_count_available",
+    "slot0_thumb_mean_motion_norm_per_s",
+    "slot0_thumb_mean_motion_norm_per_s_available",
+    "slot0_thumb_max_motion_norm_per_s",
+    "slot0_thumb_max_motion_norm_per_s_available",
+    "slot0_thumb_mean_abs_joint_angle_change_deg",
+    "slot0_thumb_mean_abs_joint_angle_change_deg_available",
+    "slot0_index_mean_motion_norm_per_s",
+    "slot0_index_mean_motion_norm_per_s_available",
+    "slot0_index_max_motion_norm_per_s",
+    "slot0_index_max_motion_norm_per_s_available",
+    "slot0_index_mean_abs_joint_angle_change_deg",
+    "slot0_index_mean_abs_joint_angle_change_deg_available",
+    "slot0_middle_mean_motion_norm_per_s",
+    "slot0_middle_mean_motion_norm_per_s_available",
+    "slot0_middle_max_motion_norm_per_s",
+    "slot0_middle_max_motion_norm_per_s_available",
+    "slot0_middle_mean_abs_joint_angle_change_deg",
+    "slot0_middle_mean_abs_joint_angle_change_deg_available",
+    "slot0_ring_mean_motion_norm_per_s",
+    "slot0_ring_mean_motion_norm_per_s_available",
+    "slot0_ring_max_motion_norm_per_s",
+    "slot0_ring_max_motion_norm_per_s_available",
+    "slot0_ring_mean_abs_joint_angle_change_deg",
+    "slot0_ring_mean_abs_joint_angle_change_deg_available",
+    "slot0_pinky_mean_motion_norm_per_s",
+    "slot0_pinky_mean_motion_norm_per_s_available",
+    "slot0_pinky_max_motion_norm_per_s",
+    "slot0_pinky_max_motion_norm_per_s_available",
+    "slot0_pinky_mean_abs_joint_angle_change_deg",
+    "slot0_pinky_mean_abs_joint_angle_change_deg_available",
+    "slot0_wrist_path_length_image_norm",
+    "slot0_wrist_path_length_image_norm_available",
+    "slot0_wrist_mean_step_image_norm",
+    "slot0_wrist_mean_step_image_norm_available",
+    "slot0_wrist_mean_speed_image_norm_per_s",
+    "slot0_wrist_mean_speed_image_norm_per_s_available",
+    "slot0_wrist_max_speed_image_norm_per_s",
+    "slot0_wrist_max_speed_image_norm_per_s_available",
+    "slot0_wrist_start_to_end_displacement_image_norm",
+    "slot0_wrist_start_to_end_displacement_image_norm_available",
+    "slot0_wrist_valid_position_count",
+    "slot0_wrist_valid_position_count_available",
+    "slot1_valid_frame_count",
+    "slot1_valid_frame_count_available",
+    "slot1_missing_frame_count",
+    "slot1_missing_frame_count_available",
+    "slot1_valid_frame_ratio",
+    "slot1_valid_frame_ratio_available",
+    "slot1_handedness_consistency",
+    "slot1_handedness_consistency_available",
+    "slot1_handedness_mode",
+    "slot1_handedness_mode_available",
+    "slot1_thumb_joint1_angle_deg_mean",
+    "slot1_thumb_joint1_angle_deg_mean_available",
+    "slot1_thumb_joint1_angle_deg_std",
+    "slot1_thumb_joint1_angle_deg_std_available",
+    "slot1_thumb_joint2_angle_deg_mean",
+    "slot1_thumb_joint2_angle_deg_mean_available",
+    "slot1_thumb_joint2_angle_deg_std",
+    "slot1_thumb_joint2_angle_deg_std_available",
+    "slot1_thumb_joint3_angle_deg_mean",
+    "slot1_thumb_joint3_angle_deg_mean_available",
+    "slot1_thumb_joint3_angle_deg_std",
+    "slot1_thumb_joint3_angle_deg_std_available",
+    "slot1_index_joint1_angle_deg_mean",
+    "slot1_index_joint1_angle_deg_mean_available",
+    "slot1_index_joint1_angle_deg_std",
+    "slot1_index_joint1_angle_deg_std_available",
+    "slot1_index_joint2_angle_deg_mean",
+    "slot1_index_joint2_angle_deg_mean_available",
+    "slot1_index_joint2_angle_deg_std",
+    "slot1_index_joint2_angle_deg_std_available",
+    "slot1_index_joint3_angle_deg_mean",
+    "slot1_index_joint3_angle_deg_mean_available",
+    "slot1_index_joint3_angle_deg_std",
+    "slot1_index_joint3_angle_deg_std_available",
+    "slot1_middle_joint1_angle_deg_mean",
+    "slot1_middle_joint1_angle_deg_mean_available",
+    "slot1_middle_joint1_angle_deg_std",
+    "slot1_middle_joint1_angle_deg_std_available",
+    "slot1_middle_joint2_angle_deg_mean",
+    "slot1_middle_joint2_angle_deg_mean_available",
+    "slot1_middle_joint2_angle_deg_std",
+    "slot1_middle_joint2_angle_deg_std_available",
+    "slot1_middle_joint3_angle_deg_mean",
+    "slot1_middle_joint3_angle_deg_mean_available",
+    "slot1_middle_joint3_angle_deg_std",
+    "slot1_middle_joint3_angle_deg_std_available",
+    "slot1_ring_joint1_angle_deg_mean",
+    "slot1_ring_joint1_angle_deg_mean_available",
+    "slot1_ring_joint1_angle_deg_std",
+    "slot1_ring_joint1_angle_deg_std_available",
+    "slot1_ring_joint2_angle_deg_mean",
+    "slot1_ring_joint2_angle_deg_mean_available",
+    "slot1_ring_joint2_angle_deg_std",
+    "slot1_ring_joint2_angle_deg_std_available",
+    "slot1_ring_joint3_angle_deg_mean",
+    "slot1_ring_joint3_angle_deg_mean_available",
+    "slot1_ring_joint3_angle_deg_std",
+    "slot1_ring_joint3_angle_deg_std_available",
+    "slot1_pinky_joint1_angle_deg_mean",
+    "slot1_pinky_joint1_angle_deg_mean_available",
+    "slot1_pinky_joint1_angle_deg_std",
+    "slot1_pinky_joint1_angle_deg_std_available",
+    "slot1_pinky_joint2_angle_deg_mean",
+    "slot1_pinky_joint2_angle_deg_mean_available",
+    "slot1_pinky_joint2_angle_deg_std",
+    "slot1_pinky_joint2_angle_deg_std_available",
+    "slot1_pinky_joint3_angle_deg_mean",
+    "slot1_pinky_joint3_angle_deg_mean_available",
+    "slot1_pinky_joint3_angle_deg_std",
+    "slot1_pinky_joint3_angle_deg_std_available",
+    "slot1_thumb_tip_to_wrist_distance_norm_mean",
+    "slot1_thumb_tip_to_wrist_distance_norm_mean_available",
+    "slot1_thumb_tip_to_wrist_distance_norm_std",
+    "slot1_thumb_tip_to_wrist_distance_norm_std_available",
+    "slot1_thumb_tip_to_palm_center_distance_norm_mean",
+    "slot1_thumb_tip_to_palm_center_distance_norm_mean_available",
+    "slot1_thumb_tip_to_palm_center_distance_norm_std",
+    "slot1_thumb_tip_to_palm_center_distance_norm_std_available",
+    "slot1_thumb_extension_ratio_mean",
+    "slot1_thumb_extension_ratio_mean_available",
+    "slot1_thumb_extension_ratio_std",
+    "slot1_thumb_extension_ratio_std_available",
+    "slot1_index_tip_to_wrist_distance_norm_mean",
+    "slot1_index_tip_to_wrist_distance_norm_mean_available",
+    "slot1_index_tip_to_wrist_distance_norm_std",
+    "slot1_index_tip_to_wrist_distance_norm_std_available",
+    "slot1_index_tip_to_palm_center_distance_norm_mean",
+    "slot1_index_tip_to_palm_center_distance_norm_mean_available",
+    "slot1_index_tip_to_palm_center_distance_norm_std",
+    "slot1_index_tip_to_palm_center_distance_norm_std_available",
+    "slot1_index_extension_ratio_mean",
+    "slot1_index_extension_ratio_mean_available",
+    "slot1_index_extension_ratio_std",
+    "slot1_index_extension_ratio_std_available",
+    "slot1_middle_tip_to_wrist_distance_norm_mean",
+    "slot1_middle_tip_to_wrist_distance_norm_mean_available",
+    "slot1_middle_tip_to_wrist_distance_norm_std",
+    "slot1_middle_tip_to_wrist_distance_norm_std_available",
+    "slot1_middle_tip_to_palm_center_distance_norm_mean",
+    "slot1_middle_tip_to_palm_center_distance_norm_mean_available",
+    "slot1_middle_tip_to_palm_center_distance_norm_std",
+    "slot1_middle_tip_to_palm_center_distance_norm_std_available",
+    "slot1_middle_extension_ratio_mean",
+    "slot1_middle_extension_ratio_mean_available",
+    "slot1_middle_extension_ratio_std",
+    "slot1_middle_extension_ratio_std_available",
+    "slot1_ring_tip_to_wrist_distance_norm_mean",
+    "slot1_ring_tip_to_wrist_distance_norm_mean_available",
+    "slot1_ring_tip_to_wrist_distance_norm_std",
+    "slot1_ring_tip_to_wrist_distance_norm_std_available",
+    "slot1_ring_tip_to_palm_center_distance_norm_mean",
+    "slot1_ring_tip_to_palm_center_distance_norm_mean_available",
+    "slot1_ring_tip_to_palm_center_distance_norm_std",
+    "slot1_ring_tip_to_palm_center_distance_norm_std_available",
+    "slot1_ring_extension_ratio_mean",
+    "slot1_ring_extension_ratio_mean_available",
+    "slot1_ring_extension_ratio_std",
+    "slot1_ring_extension_ratio_std_available",
+    "slot1_pinky_tip_to_wrist_distance_norm_mean",
+    "slot1_pinky_tip_to_wrist_distance_norm_mean_available",
+    "slot1_pinky_tip_to_wrist_distance_norm_std",
+    "slot1_pinky_tip_to_wrist_distance_norm_std_available",
+    "slot1_pinky_tip_to_palm_center_distance_norm_mean",
+    "slot1_pinky_tip_to_palm_center_distance_norm_mean_available",
+    "slot1_pinky_tip_to_palm_center_distance_norm_std",
+    "slot1_pinky_tip_to_palm_center_distance_norm_std_available",
+    "slot1_pinky_extension_ratio_mean",
+    "slot1_pinky_extension_ratio_mean_available",
+    "slot1_pinky_extension_ratio_std",
+    "slot1_pinky_extension_ratio_std_available",
+    "slot1_palm_length_norm_mean",
+    "slot1_palm_length_norm_mean_available",
+    "slot1_palm_length_norm_std",
+    "slot1_palm_length_norm_std_available",
+    "slot1_palm_span_norm_mean",
+    "slot1_palm_span_norm_mean_available",
+    "slot1_palm_span_norm_std",
+    "slot1_palm_span_norm_std_available",
+    "slot1_wrist_to_palm_center_norm_mean",
+    "slot1_wrist_to_palm_center_norm_mean_available",
+    "slot1_wrist_to_palm_center_norm_std",
+    "slot1_wrist_to_palm_center_norm_std_available",
+    "slot1_mcp_5_to_9_distance_norm_mean",
+    "slot1_mcp_5_to_9_distance_norm_mean_available",
+    "slot1_mcp_5_to_9_distance_norm_std",
+    "slot1_mcp_5_to_9_distance_norm_std_available",
+    "slot1_mcp_5_to_13_distance_norm_mean",
+    "slot1_mcp_5_to_13_distance_norm_mean_available",
+    "slot1_mcp_5_to_13_distance_norm_std",
+    "slot1_mcp_5_to_13_distance_norm_std_available",
+    "slot1_mcp_5_to_17_distance_norm_mean",
+    "slot1_mcp_5_to_17_distance_norm_mean_available",
+    "slot1_mcp_5_to_17_distance_norm_std",
+    "slot1_mcp_5_to_17_distance_norm_std_available",
+    "slot1_mcp_9_to_13_distance_norm_mean",
+    "slot1_mcp_9_to_13_distance_norm_mean_available",
+    "slot1_mcp_9_to_13_distance_norm_std",
+    "slot1_mcp_9_to_13_distance_norm_std_available",
+    "slot1_mcp_9_to_17_distance_norm_mean",
+    "slot1_mcp_9_to_17_distance_norm_mean_available",
+    "slot1_mcp_9_to_17_distance_norm_std",
+    "slot1_mcp_9_to_17_distance_norm_std_available",
+    "slot1_mcp_13_to_17_distance_norm_mean",
+    "slot1_mcp_13_to_17_distance_norm_mean_available",
+    "slot1_mcp_13_to_17_distance_norm_std",
+    "slot1_mcp_13_to_17_distance_norm_std_available",
+    "slot1_palm_projected_area_norm2_mean",
+    "slot1_palm_projected_area_norm2_mean_available",
+    "slot1_palm_projected_area_norm2_std",
+    "slot1_palm_projected_area_norm2_std_available",
+    "slot1_palm_axis_orientation_sin_mean",
+    "slot1_palm_axis_orientation_sin_mean_available",
+    "slot1_palm_axis_orientation_sin_std",
+    "slot1_palm_axis_orientation_sin_std_available",
+    "slot1_palm_axis_orientation_cos_mean",
+    "slot1_palm_axis_orientation_cos_mean_available",
+    "slot1_palm_axis_orientation_cos_std",
+    "slot1_palm_axis_orientation_cos_std_available",
+    "slot1_palm_axis_circular_mean_deg",
+    "slot1_palm_axis_circular_mean_deg_available",
+    "slot1_mean_landmark_displacement_norm",
+    "slot1_mean_landmark_displacement_norm_available",
+    "slot1_std_landmark_displacement_norm",
+    "slot1_std_landmark_displacement_norm_available",
+    "slot1_mean_motion_magnitude_norm_per_s",
+    "slot1_mean_motion_magnitude_norm_per_s_available",
+    "slot1_max_motion_magnitude_norm_per_s",
+    "slot1_max_motion_magnitude_norm_per_s_available",
+    "slot1_motion_variation_norm_per_interval",
+    "slot1_motion_variation_norm_per_interval_available",
+    "slot1_valid_motion_interval_count",
+    "slot1_valid_motion_interval_count_available",
+    "slot1_thumb_mean_motion_norm_per_s",
+    "slot1_thumb_mean_motion_norm_per_s_available",
+    "slot1_thumb_max_motion_norm_per_s",
+    "slot1_thumb_max_motion_norm_per_s_available",
+    "slot1_thumb_mean_abs_joint_angle_change_deg",
+    "slot1_thumb_mean_abs_joint_angle_change_deg_available",
+    "slot1_index_mean_motion_norm_per_s",
+    "slot1_index_mean_motion_norm_per_s_available",
+    "slot1_index_max_motion_norm_per_s",
+    "slot1_index_max_motion_norm_per_s_available",
+    "slot1_index_mean_abs_joint_angle_change_deg",
+    "slot1_index_mean_abs_joint_angle_change_deg_available",
+    "slot1_middle_mean_motion_norm_per_s",
+    "slot1_middle_mean_motion_norm_per_s_available",
+    "slot1_middle_max_motion_norm_per_s",
+    "slot1_middle_max_motion_norm_per_s_available",
+    "slot1_middle_mean_abs_joint_angle_change_deg",
+    "slot1_middle_mean_abs_joint_angle_change_deg_available",
+    "slot1_ring_mean_motion_norm_per_s",
+    "slot1_ring_mean_motion_norm_per_s_available",
+    "slot1_ring_max_motion_norm_per_s",
+    "slot1_ring_max_motion_norm_per_s_available",
+    "slot1_ring_mean_abs_joint_angle_change_deg",
+    "slot1_ring_mean_abs_joint_angle_change_deg_available",
+    "slot1_pinky_mean_motion_norm_per_s",
+    "slot1_pinky_mean_motion_norm_per_s_available",
+    "slot1_pinky_max_motion_norm_per_s",
+    "slot1_pinky_max_motion_norm_per_s_available",
+    "slot1_pinky_mean_abs_joint_angle_change_deg",
+    "slot1_pinky_mean_abs_joint_angle_change_deg_available",
+    "slot1_wrist_path_length_image_norm",
+    "slot1_wrist_path_length_image_norm_available",
+    "slot1_wrist_mean_step_image_norm",
+    "slot1_wrist_mean_step_image_norm_available",
+    "slot1_wrist_mean_speed_image_norm_per_s",
+    "slot1_wrist_mean_speed_image_norm_per_s_available",
+    "slot1_wrist_max_speed_image_norm_per_s",
+    "slot1_wrist_max_speed_image_norm_per_s_available",
+    "slot1_wrist_start_to_end_displacement_image_norm",
+    "slot1_wrist_start_to_end_displacement_image_norm_available",
+    "slot1_wrist_valid_position_count",
+    "slot1_wrist_valid_position_count_available"
+  ],
+  "numeric_feature_count": 233,
+  "categorical_feature_count": 2,
+  "feature_count": 235,
+  "validation": {
+    "validated_recordings": 27,
+    "class_counts": {
+      "HELP": 5,
+      "NO": 5,
+      "STOP": 5,
+      "WATER": 5,
+      "YES": 7
+    },
+    "generated_feature_rows": 27
+  }
+}

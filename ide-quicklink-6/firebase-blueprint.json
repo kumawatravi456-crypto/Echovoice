@@ -1,0 +1,47 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile metadata stored upon Google sign-in",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "The unique Firebase Authentication user ID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User's Google display name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User's primary Google account email"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "User's Google avatar photo URL"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the user account was first created in Firestore"
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the user most recently signed in"
+        }
+      },
+      "required": ["uid", "email", "createdAt", "lastLoginAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "User profile document containing only the user's UID, display name, email, photo URL, createdAt, and lastLoginAt"
+    }
+  }
+}

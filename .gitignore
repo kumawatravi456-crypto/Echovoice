@@ -1,0 +1,35 @@
+# Python environments
+.venv/
+.venv*/
+venv/
+env/
+
+# Python generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+
+# Frontend dependencies and builds
+node_modules/
+dist/
+build/
+.vite/
+
+# macOS and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+.aistudio/
+.vercel/
+.vercel
+.env*

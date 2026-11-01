@@ -1,0 +1,41 @@
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Dataset media and derived data (keep directory scaffolding)
+datasets/**/*
+!datasets/**/
+!datasets/**/.gitkeep
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.zip
+*.tar
+*.gz
+*.h5
+*.npy
+*.npz
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Temporary/editor/system files
+.DS_Store
+*.tmp
+*.swp
+*.log
+
+# Project Echo submission artifacts (safe to publish)
+!datasets/processed/models/hand_gestures/baseline_v1/model.joblib
+!datasets/processed/models/hand_gestures/baseline_v1/model_metadata.json
+!datasets/processed/evaluation/hand_gestures/baseline_v1/metrics.json
+!datasets/processed/features/hand_gestures/feature_metadata.json

@@ -1,0 +1,66 @@
+{
+  "artifact_format": "joblib serialized scikit-learn Pipeline",
+  "model_file": "model.joblib",
+  "feature_columns": [
+    "slot0_thumb_joint2_angle_deg_mean",
+    "slot0_index_joint1_angle_deg_mean",
+    "slot0_pinky_joint2_angle_deg_mean",
+    "slot0_index_extension_ratio_mean",
+    "slot0_thumb_tip_to_palm_center_distance_norm_mean",
+    "slot0_index_tip_to_wrist_distance_norm_mean",
+    "slot0_palm_projected_area_norm2_mean"
+  ],
+  "class_labels": [
+    "HELP",
+    "NO",
+    "STOP",
+    "WATER",
+    "YES"
+  ],
+  "estimator_classes": [
+    "HELP",
+    "NO",
+    "STOP",
+    "WATER",
+    "YES"
+  ],
+  "training_row_count": 27,
+  "class_counts": {
+    "HELP": 5,
+    "NO": 5,
+    "STOP": 5,
+    "WATER": 5,
+    "YES": 7
+  },
+  "model_configuration": {
+    "estimator": "sklearn.pipeline.Pipeline",
+    "steps": [
+      {
+        "name": "standard_scaler",
+        "class": "sklearn.preprocessing.StandardScaler",
+        "with_mean": true,
+        "with_std": true
+      },
+      {
+        "name": "logistic_regression",
+        "class": "sklearn.linear_model.LogisticRegression",
+        "C": 1.0,
+        "class_weight": "balanced",
+        "max_iter": 2000,
+        "random_state": 42,
+        "solver": "lbfgs"
+      }
+    ],
+    "fit_scope": "all validated recording-level rows for final inference artifact; evaluation artifacts are unchanged",
+    "random_state": 42
+  },
+  "random_state": 42,
+  "software_versions": {
+    "python": "3.11.18",
+    "numpy": "2.2.6",
+    "scikit_learn": "1.9.1",
+    "joblib": "1.6.0"
+  },
+  "probability_note": "predict_proba outputs are model probabilities and have not been calibrated; do not interpret them as calibrated confidence.",
+  "training_data": "datasets/processed/features/hand_gestures/features.csv"
+}

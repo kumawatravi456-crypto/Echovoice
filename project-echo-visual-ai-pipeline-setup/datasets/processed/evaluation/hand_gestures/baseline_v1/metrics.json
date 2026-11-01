@@ -1,0 +1,342 @@
+{
+  "evaluation": {
+    "unit": "recording",
+    "method": "5-fold stratified cross-validation with out-of-fold predictions",
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "labels": [
+      "HELP",
+      "NO",
+      "STOP",
+      "WATER",
+      "YES"
+    ],
+    "feature_columns": [
+      "slot0_thumb_joint2_angle_deg_mean",
+      "slot0_index_joint1_angle_deg_mean",
+      "slot0_pinky_joint2_angle_deg_mean",
+      "slot0_index_extension_ratio_mean",
+      "slot0_thumb_tip_to_palm_center_distance_norm_mean",
+      "slot0_index_tip_to_wrist_distance_norm_mean",
+      "slot0_palm_projected_area_norm2_mean"
+    ],
+    "target_column": "class_label",
+    "models": {
+      "dummy_most_frequent": {
+        "class": "sklearn.dummy.DummyClassifier",
+        "strategy": "most_frequent"
+      },
+      "logistic_regression": {
+        "class": "sklearn.pipeline.Pipeline",
+        "steps": [
+          {
+            "name": "standard_scaler",
+            "class": "sklearn.preprocessing.StandardScaler"
+          },
+          {
+            "name": "logistic_regression",
+            "class": "sklearn.linear_model.LogisticRegression",
+            "C": 1.0,
+            "class_weight": "balanced",
+            "max_iter": 2000,
+            "random_state": 42
+          }
+        ],
+        "scaling": "fit only inside each training fold through the Pipeline"
+      }
+    },
+    "software": {
+      "python": "3.11.18",
+      "numpy": "2.2.6",
+      "scikit_learn": "1.9.1"
+    },
+    "fold_class_distributions": [
+      {
+        "fold": 1,
+        "train_recordings": 21,
+        "test_recordings": 6,
+        "train_class_counts": {
+          "HELP": 4,
+          "NO": 4,
+          "STOP": 4,
+          "WATER": 4,
+          "YES": 5
+        },
+        "test_class_counts": {
+          "HELP": 1,
+          "NO": 1,
+          "STOP": 1,
+          "WATER": 1,
+          "YES": 2
+        }
+      },
+      {
+        "fold": 2,
+        "train_recordings": 21,
+        "test_recordings": 6,
+        "train_class_counts": {
+          "HELP": 4,
+          "NO": 4,
+          "STOP": 4,
+          "WATER": 4,
+          "YES": 5
+        },
+        "test_class_counts": {
+          "HELP": 1,
+          "NO": 1,
+          "STOP": 1,
+          "WATER": 1,
+          "YES": 2
+        }
+      },
+      {
+        "fold": 3,
+        "train_recordings": 22,
+        "test_recordings": 5,
+        "train_class_counts": {
+          "HELP": 4,
+          "NO": 4,
+          "STOP": 4,
+          "WATER": 4,
+          "YES": 6
+        },
+        "test_class_counts": {
+          "HELP": 1,
+          "NO": 1,
+          "STOP": 1,
+          "WATER": 1,
+          "YES": 1
+        }
+      },
+      {
+        "fold": 4,
+        "train_recordings": 22,
+        "test_recordings": 5,
+        "train_class_counts": {
+          "HELP": 4,
+          "NO": 4,
+          "STOP": 4,
+          "WATER": 4,
+          "YES": 6
+        },
+        "test_class_counts": {
+          "HELP": 1,
+          "NO": 1,
+          "STOP": 1,
+          "WATER": 1,
+          "YES": 1
+        }
+      },
+      {
+        "fold": 5,
+        "train_recordings": 22,
+        "test_recordings": 5,
+        "train_class_counts": {
+          "HELP": 4,
+          "NO": 4,
+          "STOP": 4,
+          "WATER": 4,
+          "YES": 6
+        },
+        "test_class_counts": {
+          "HELP": 1,
+          "NO": 1,
+          "STOP": 1,
+          "WATER": 1,
+          "YES": 1
+        }
+      }
+    ],
+    "limitations": [
+      "All 27 recordings come from one participant; this is a same-participant exploratory evaluation.",
+      "Cross-validation is not an independent external test and does not establish participant-independent generalization.",
+      "The sample is small and class counts are imbalanced; fold estimates can be unstable.",
+      "No hyperparameter tuning or feature selection used held-out folds.",
+      "This experiment does not validate real-world AAC performance."
+    ]
+  },
+  "dataset": {
+    "recording_count": 27,
+    "class_counts": {
+      "HELP": 5,
+      "NO": 5,
+      "STOP": 5,
+      "WATER": 5,
+      "YES": 7
+    },
+    "feature_count": 7
+  },
+  "models": {
+    "dummy_most_frequent": {
+      "metrics": {
+        "accuracy": 0.25925925925925924,
+        "balanced_accuracy": 0.2,
+        "macro_precision": 0.05185185185185185,
+        "macro_recall": 0.2,
+        "macro_f1": 0.08235294117647059,
+        "per_class": {
+          "HELP": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 5
+          },
+          "NO": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 5
+          },
+          "STOP": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 5
+          },
+          "WATER": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 5
+          },
+          "YES": {
+            "precision": 0.25925925925925924,
+            "recall": 1.0,
+            "f1": 0.4117647058823529,
+            "support": 7
+          }
+        }
+      },
+      "confusion_matrix_label_order": [
+        "HELP",
+        "NO",
+        "STOP",
+        "WATER",
+        "YES"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          7
+        ]
+      ]
+    },
+    "logistic_regression": {
+      "metrics": {
+        "accuracy": 0.8888888888888888,
+        "balanced_accuracy": 0.9142857142857143,
+        "macro_precision": 0.9095238095238095,
+        "macro_recall": 0.9142857142857143,
+        "macro_f1": 0.8939393939393939,
+        "per_class": {
+          "HELP": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 5
+          },
+          "NO": {
+            "precision": 0.7142857142857143,
+            "recall": 1.0,
+            "f1": 0.8333333333333334,
+            "support": 5
+          },
+          "STOP": {
+            "precision": 0.8333333333333334,
+            "recall": 1.0,
+            "f1": 0.9090909090909091,
+            "support": 5
+          },
+          "WATER": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 5
+          },
+          "YES": {
+            "precision": 1.0,
+            "recall": 0.5714285714285714,
+            "f1": 0.7272727272727273,
+            "support": 7
+          }
+        }
+      },
+      "confusion_matrix_label_order": [
+        "HELP",
+        "NO",
+        "STOP",
+        "WATER",
+        "YES"
+      ],
+      "confusion_matrix": [
+        [
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          4
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Project Echo",
+  "description": "An AI-powered multimodal communication assistant designed to bridge speech and communication difficulties through voice, facial cues, gestures, and context.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

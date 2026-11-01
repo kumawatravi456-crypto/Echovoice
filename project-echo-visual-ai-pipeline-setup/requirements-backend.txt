@@ -1,0 +1,13 @@
+fastapi==0.162.0
+python-multipart==0.0.20
+uvicorn[standard]==0.54.0
+pydantic==2.14.2
+numpy==2.2.6
+scikit-learn==1.9.1
+joblib==1.6.0
+groq==1.7.0
+httpx==0.28.1
+mediapipe==0.10.35
+opencv-contrib-python==4.12.0.88
+httpx2==2.16.0
+pytest==8.4.2
